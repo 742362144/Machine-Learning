@@ -33,6 +33,7 @@ class KNN(object):
             classLabelVector.append(int(listFromLine[-1]))
             index += 1
         return returnMat, classLabelVector
+
     # k邻近算法----采用欧式距离公式
     # inx----用于分类的输入向量，也就是要测试的输入数据集
     # dataSet----输入的训练样本集
@@ -60,9 +61,9 @@ class KNN(object):
             voteIlable = labels[sortedDistIndicies[i]]
             classCount[voteIlable] = classCount.get(voteIlable, 0) + 1
         # 对结果排序
+        # 调用sorted(a)，对a进行排序后返回一个新的列表，而对a不产生影响
         sortedClassCount = sorted(classCount.items(),
                                   key=operator.itemgetter(1), reverse=True)
-        print(sortedClassCount)
         return sortedClassCount[0][0]
 
     # filename----存有数据的文本名
@@ -124,7 +125,6 @@ class KNN(object):
             # 看预测结果与实际的比较
             if (classifierResult != datingLabels[i]):
                 errorCount += 1.0
-            break  # todo
         print("the total error rate is: %f" % (errorCount / float(numTestVecs)))
         print(errorCount)
 
