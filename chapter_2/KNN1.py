@@ -11,7 +11,7 @@ class KNN(object):
         labels = ['A', 'A', 'B', 'B']
         return group, labels
 
-    def classfy0(self, inx, dataSet, labels,k):
+    def classify0(self, inx, dataSet, labels,k):
         dataSetSize = dataSet.shape[0]
         diffMat = tile(inx, (dataSetSize, 1)) - dataSet
         sqDiffMat = diffMat**2
@@ -28,4 +28,4 @@ class KNN(object):
 
 knn = KNN()
 group, labels = knn.createDataSet()
-print(knn.classfy0([0,0], group, labels, 3))
+print(knn.classify0([0,0], group, labels, 3))
