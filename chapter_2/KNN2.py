@@ -128,10 +128,29 @@ class KNN(object):
         print("the total error rate is: %f" % (errorCount / float(numTestVecs)))
         print(errorCount)
 
-knn = KNN()
-# datingDataMat, datingLabels = knn.file2matrix('datingTestSet2.txt')
-#
-# knn.draw(datingDataMat, datingLabels)
+    # 约会预测函数
+    def classifyPerson(self):
+        # 三种输出类型
+        resultList = ['not at all', 'in small doses', 'in large doses']
+        # 输入数据
+        percentTats = float(input("percentage of time spent playing video games?"))
+        ffMiles = float(input("frequent flier mile earned per year？"))
+        iceCream = float(input("liters of ice Cream consumed per year?"))
+        # 稳健获取测试数据
+        datingDataMat, datingLabels = self.file2matrix("datingTestSet2.txt")
+        # 规格化
+        normMat, ranges, minVals = self.autoNorm(datingDataMat)
+        # 待预测的输入数据
+        inArr = array([ffMiles, percentTats, iceCream])
+        # 预测结果
+        classflierResult = self.classify0((inArr-minVals)/ranges, normMat, datingLabels, 3)
+        print("you will probably like this person:", resultList[classflierResult-1])
 
-# normMat, ranges, minVals = knn.autoNorm(datingDataMat)
-knn.datingClassTest()
+if __name__=="__main__":
+    knn = KNN()
+    # datingDataMat, datingLabels = knn.file2matrix('datingTestSet2.txt')
+    #
+    # knn.draw(datingDataMat, datingLabels)
+    # normMat, ranges, minVals = knn.autoNorm(datingDataMat)
+    # knn.datingClassTest()
+    knn.classifyPerson()
